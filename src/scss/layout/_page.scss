@@ -1,0 +1,27 @@
+h1 {
+    padding: 10px 20px;
+}
+
+.form {
+    padding: 10px 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 100px;
+
+    &__section-favorite {
+        border: solid 2px black;
+        width: 35vw;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__section-results {
+        border: solid 2px black;
+        width: 35vw;
+        display: flex;
+        flex-direction: column;
+    }
+}
