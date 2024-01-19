@@ -29,7 +29,7 @@ function getDataApi(searchValue) {
 function renderSeries(seriesArray) {
 
     const containerResults = document.querySelector(".js-container-results");
-
+    containerResults.innerHTML = "";
 
     for (let i = 0; i < seriesArray.length; i++) {
 
@@ -141,4 +141,23 @@ function getDataLocalStorage() {
 getDataLocalStorage()
 
 
+//RESET BUTTON
 
+function handleReset(event) {
+
+    event.preventDefault();
+
+    //remover elementos del local storage
+    favoriteAnimes = [];
+    localStorage.removeItem('FavoriteAnimes');
+    //limpiar pantalla
+    const containerFavorite = document.querySelector(".js-container-favorite");
+    containerFavorite.innerHTML = "";
+    const containerResults = document.querySelector(".js-container-results");
+    containerResults.innerHTML = "";
+    //limpiar input
+    inputSearch.value = "";
+}
+
+
+buttonReset.addEventListener('click', handleReset)
