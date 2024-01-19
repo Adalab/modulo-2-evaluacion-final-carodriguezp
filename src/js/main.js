@@ -66,7 +66,7 @@ function renderFavoriteSeries(seriesArray) {
     const containerFavorite = document.querySelector(".js-container-favorite");
     containerFavorite.innerHTML = "";
 
-
+    //RENDERIZAR ELEMENTOS EN EL CONTAINER DE FAVORITOS
     for (let i = 0; i < seriesArray.length; i++) {
 
         containerFavorite.innerHTML += `<li class="js-element-list" id="${seriesArray[i].mal_id}">
@@ -103,7 +103,11 @@ function handleAddFavoriteAnime(event) {
 
         favoriteAnimes.push(favoriteAnimeId); //para meter ese anime en el array de paletas favoritas
     }
+
     renderFavoriteSeries(favoriteAnimes)
+
+    //PARA GUARDAR LA LISTA DE FAVORITOS EN EL LOCALSTORAGE
+    localStorage.setItem("FavoriteAnimes", JSON.stringify(favoriteAnimes));
 }
 
 ///FUNCION LISTENER DE CADA LI
@@ -119,6 +123,22 @@ function listenerAnimes() {
 
 
 
-//METER DATOS EN LOCAL STORAGE
+//HACER FUNCIÓN PARA PEDIR LOS DATOS AL LOCAL STORAGE (SIEMPRE SERÁ UN STRING) Y EJECUTARLO AL CARGAR LA PAGINA
+function getDataLocalStorage() {
 
-//RENDERIZAR ELEMENTOS EN EL CONTAINER DE FAVORITOS
+    const datafavoriteAnimesLocal = JSON.parse(localStorage.getItem("FavoriteAnimes")) //FavoriteAnimes es el nombre que le di al guardar en el local storage
+    //si no hay nada el servidor nos devuelve NULL
+    if (datafavoriteAnimesLocal !== null) {//SI tenemos datos en el local estorage
+        //modificamos el array de favoriteAnimes
+        favoriteAnimes = datafavoriteAnimesLocal; //para que coja los datos del localStorage
+        renderFavoriteSeries(datafavoriteAnimesLocal) //volvemos a renderizar para pintar los datos que nos lleguen desde la API
+
+    } else {
+        getDataApi();//que es la función que obtiene los datos de la API para que luego se pinten
+    }
+}
+
+getDataLocalStorage()
+
+
+
