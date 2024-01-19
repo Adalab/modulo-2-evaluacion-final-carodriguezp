@@ -8,7 +8,8 @@ const buttonReset = document.querySelector(".js-button-reset");
 
 
 //OBTENER DATOS DE LA API
-let seriesList = [];
+let animesList = [];
+let favoriteAnimes = [];
 
 function getDataApi(searchValue) {
     const url = `https://api.jikan.moe/v4/anime?q=${searchValue}`;
@@ -16,33 +17,36 @@ function getDataApi(searchValue) {
         .then(response => response.json()) //recibo mi respuesta y la convierto en JSON
         .then(data => { //obtengo esos datos
             // console.log(data[0].data.images.jpg.image_url, data.data[0].title)
-
-            renderSeries(data.data)
+            animesList = data.data;
+            renderSeries(animesList)
 
         }
+
         )
 }
 
-
+//FUNCION RENDER SERIES BUSQUEDA
 function renderSeries(seriesArray) {
 
-    const listContainer = document.querySelector(".js-result-list-container");
-    const list = `<ul class="js-container-results"></ul>`;
-    listContainer.innerHTML = list;
     const containerResults = document.querySelector(".js-container-results");
 
 
     for (let i = 0; i < seriesArray.length; i++) {
 
-        containerResults.innerHTML += `<li>
-                                        <img src="${seriesArray[i].images.jpg.image_url}" alt="Foto de la portada de ${seriesArray[i].title}">
-                                        <p>${seriesArray[i].title}</p>
-                                    </li>`;
+        containerResults.innerHTML += `<li class="js-element-list" id="${seriesArray[i].mal_id}">
+                                            <img src="${seriesArray[i].images.jpg.image_url}" alt="Foto de la portada de ${seriesArray[i].title}">
+                                            <p>${seriesArray[i].title}</p>
+                                        </li>`;
+        ///CONDICIONAL IMAGEN
+
+        if (seriesArray[i].images.jpg.image_url === 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png') {
+
+            seriesArray[i].images.jpg.image_url = 'https://placehold.co/200x300?text=Not+Found';
+        }
 
     }
-
+    listenerAnimes()
 }
-
 function handleClick(event) {
 
     event.preventDefault();
@@ -54,3 +58,67 @@ function handleClick(event) {
 
 
 buttonSearch.addEventListener('click', handleClick)
+
+///////////////FAVORITOS
+
+function renderFavoriteSeries(seriesArray) {
+
+    const containerFavorite = document.querySelector(".js-container-favorite");
+    containerFavorite.innerHTML = "";
+
+
+    for (let i = 0; i < seriesArray.length; i++) {
+
+        containerFavorite.innerHTML += `<li class="js-element-list" id="${seriesArray[i].mal_id}">
+                                            <img src="${seriesArray[i].images.jpg.image_url}" alt="Foto de la portada de ${seriesArray[i].title}">
+                                            <p>${seriesArray[i].title}</p>
+                                        </li>`;
+        ///CONDICIONAL IMAGEN
+
+        if (seriesArray[i].images.jpg.image_url === 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png') {
+
+            seriesArray[i].images.jpg.image_url = 'https://placehold.co/200x300?text=Not+Found';
+        }
+
+    }
+    listenerAnimes()
+}
+
+/*PARA CREAR FUNCION FAVORITOS */
+function handleAddFavoriteAnime(event) {
+
+    const idAnimeClicked = parseInt(event.currentTarget.id);
+
+
+
+    //vamos a encontrar el anime  con find
+    const favoriteAnimeId = animesList.find((anime) => idAnimeClicked === anime.mal_id); //que el id del anime que selecciono sea igual que el id del anime del array donde busca
+
+
+
+    //VALIDACIÓN para ver si está ya en favoritos o no para pintarla o no
+    const indexfavoriteAnimeInFav = favoriteAnimes.findIndex((anime) => anime.mal_id === idAnimeClicked);
+
+    if (indexfavoriteAnimeInFav === -1) {
+
+        favoriteAnimes.push(favoriteAnimeId); //para meter ese anime en el array de paletas favoritas
+    }
+    renderFavoriteSeries(favoriteAnimes)
+}
+
+///FUNCION LISTENER DE CADA LI
+function listenerAnimes() {
+
+    const animesList = document.querySelectorAll(".js-element-list"); //CREAR ARRAY//SON LIs 
+
+    for (const oneAnime of animesList) {//LISTENER DE CADA LI MEDIANTE UN BUCLE
+
+        oneAnime.addEventListener('click', handleAddFavoriteAnime);
+    }
+}
+
+
+
+//METER DATOS EN LOCAL STORAGE
+
+//RENDERIZAR ELEMENTOS EN EL CONTAINER DE FAVORITOS
