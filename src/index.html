@@ -7,7 +7,7 @@
   <title>examen módulo JavaScript carodriguezp</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./scss/main.scss" />
-  <!-- <link rel="icon" href="./images/favicon.png" /> -->
+  <script src="https://kit.fontawesome.com/153e998e96.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -18,10 +18,10 @@
 
   <form class="form">
 
-    <input class="js-input" type="text" placeholder="Nombre de la serie" />
+    <input class=" input-search js-input" type="text" placeholder="Nombre de la serie" />
 
-    <button class="js-button-search">Buscar</button>
-    <button class="js-button-reset">Reset</button>
+    <button class=" button js-button-search">Buscar</button>
+    <button class=" button js-button-reset">Reset</button>
 
 
   </form>
@@ -30,8 +30,9 @@
     <section class="container__section-favorite">
       <h2>Series favoritas</h2>
 
-      <div class="container-favorite">
+      <div class="container__section-favorite-div">
         <ul class="js-container-favorite"></ul>
+        <button class="button js-button-delete-all-fav hidden">Eliminar todo</button>
       </div>
     </section>
 
@@ -39,8 +40,8 @@
     <section class="container__section-results">
       <h2>Resultados de búsqueda</h2>
 
-      <div class="result-list-container">
-        <ul class="js-container-results"></ul>
+      <div class="container__section-results-div">
+        <ul class="container__section-results-div_list-results js-container-results"></ul>
       </div>
     </section>
 

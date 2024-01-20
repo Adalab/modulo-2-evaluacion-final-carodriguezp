@@ -1,3 +1,7 @@
+body {
+    background-image: url(../../img/kanji.PNG);
+}
+
 h1 {
     padding: 10px 20px;
 }
@@ -6,22 +10,130 @@ h1 {
     padding: 10px 20px;
 }
 
+.hidden {
+    display: none;
+}
+
+.form {
+    input {
+        color: darkred;
+        font-weight: bold;
+        padding: 10px 5px;
+        font-size: 15px;
+    }
+}
+
+.button {
+    font-size: 15px;
+    text-transform: capitalize;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: darkred;
+    color: white;
+    cursor: pointer;
+}
+
+.favorite-anime {
+    p {
+        color: greenyellow;
+        font-weight: bold;
+    }
+
+    img {
+        border: solid 5px greenyellow;
+    }
+}
+
 .container {
     display: flex;
     justify-content: space-between;
     padding: 40px 100px;
 
     &__section-favorite {
-        border: solid 2px black;
-        width: 35vw;
+        border: solid 4px darkred;
+        width: 30vw;
         display: flex;
         flex-direction: column;
+
+        h2 {
+            color: white;
+            font-weight: bold;
+
+            margin: 10px;
+            text-align: center;
+            background-color: darkred;
+
+        }
+
+        &-div {
+            ul {
+                background-color: darkred;
+            }
+
+            li {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px;
+                border: solid 3px white;
+                list-style: none;
+
+
+                img {
+                    width: 150px;
+                }
+
+                i {
+                    color: greenyellow;
+                }
+            }
+        }
     }
 
     &__section-results {
-        border: solid 2px black;
-        width: 35vw;
-        display: flex;
-        flex-direction: column;
+
+        border: solid 4px darkred;
+        width: 50vw;
+
+
+        h2 {
+            color: white;
+            font-weight: bold;
+            margin: 10px;
+            text-align: center;
+            background-color: darkred;
+
+        }
+
+        &-div {
+
+
+            &_list-results {
+                background-color: white;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+
+
+                &-element {
+                    padding: 10px;
+                    border: solid 1px darkred;
+                    list-style: none;
+                    width: 180px;
+                    margin: 5px;
+
+                    p {
+                        text-align: center;
+                        color: darkred;
+                        font-weight: bold;
+                    }
+
+                    img {
+                        width: 150px;
+
+                    }
+                }
+            }
+        }
     }
 }

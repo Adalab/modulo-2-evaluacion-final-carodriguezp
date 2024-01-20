@@ -7,6 +7,7 @@ const buttonSearch = document.querySelector(".js-button-search");
 const buttonReset = document.querySelector(".js-button-reset");
 
 
+
 //OBTENER DATOS DE LA API
 let animesList = [];
 let favoriteAnimes = [];
@@ -33,7 +34,7 @@ function renderSeries(seriesArray) {
 
     for (let i = 0; i < seriesArray.length; i++) {
 
-        containerResults.innerHTML += `<li class="js-element-list" id="${seriesArray[i].mal_id}">
+        containerResults.innerHTML += `<li class="container__section-results-div_list-results-element js-element-list" id="${seriesArray[i].mal_id}">
                                             <img src="${seriesArray[i].images.jpg.image_url}" alt="Foto de la portada de ${seriesArray[i].title}">
                                             <p>${seriesArray[i].title}</p>
                                         </li>`;
@@ -46,6 +47,7 @@ function renderSeries(seriesArray) {
 
     }
     listenerAnimes()
+
 }
 function handleClick(event) {
 
@@ -69,9 +71,10 @@ function renderFavoriteSeries(seriesArray) {
     //RENDERIZAR ELEMENTOS EN EL CONTAINER DE FAVORITOS
     for (let i = 0; i < seriesArray.length; i++) {
 
-        containerFavorite.innerHTML += `<li class="js-element-list" id="${seriesArray[i].mal_id}">
+        containerFavorite.innerHTML += `<li class="js-element-list favorite-anime" id="${seriesArray[i].mal_id}">
                                             <img src="${seriesArray[i].images.jpg.image_url}" alt="Foto de la portada de ${seriesArray[i].title}">
                                             <p>${seriesArray[i].title}</p>
+                                            <i id="${seriesArray[i].mal_id}" class="fa-solid fa-square-xmark js-button-remove-favorite"></i>
                                         </li>`;
         ///CONDICIONAL IMAGEN
 
@@ -82,14 +85,14 @@ function renderFavoriteSeries(seriesArray) {
 
     }
     listenerAnimes()
+    listenerRemoveIcon()
+    // 
 }
 
 /*PARA CREAR FUNCION FAVORITOS */
 function handleAddFavoriteAnime(event) {
 
     const idAnimeClicked = parseInt(event.currentTarget.id);
-
-
 
     //vamos a encontrar el anime  con find
     const favoriteAnimeId = animesList.find((anime) => idAnimeClicked === anime.mal_id); //que el id del anime que selecciono sea igual que el id del anime del array donde busca
@@ -105,6 +108,8 @@ function handleAddFavoriteAnime(event) {
     }
 
     renderFavoriteSeries(favoriteAnimes)
+
+    buttonRemoveAllFav.classList.remove('hidden')
 
     //PARA GUARDAR LA LISTA DE FAVORITOS EN EL LOCALSTORAGE
     localStorage.setItem("FavoriteAnimes", JSON.stringify(favoriteAnimes));
@@ -157,7 +162,68 @@ function handleReset(event) {
     containerResults.innerHTML = "";
     //limpiar input
     inputSearch.value = "";
+    buttonRemoveAllFav.classList.add('hidden')///EL BOTON 
 }
 
 
 buttonReset.addEventListener('click', handleReset)
+
+///borrar un li favorito
+//los iconos
+
+
+function handleRemoveOneFav(event) {
+    //eliminar elemento li del container fav
+
+    ///////////////////////////
+    const iconRemoveFav = parseInt(event.currentTarget.id);
+
+    console.log(event.currentTarget, event.currentTarget.id)
+
+
+    //vamos a encontrar el anime  con find
+    const removeAnimeId = favoriteAnimes.find((anime) => iconRemoveFav === anime.mal_id); //que el id del anime que selecciono sea igual que el id del anime del array donde busca
+
+
+    //VALIDACIÓN para ver si está ya en favoritos o no para pintarla o no
+    const indexAnimeInFavToRemove = favoriteAnimes.findIndex((anime) => anime.mal_id === iconRemoveFav);
+    console.log(favoriteAnimes, parseInt(indexAnimeInFavToRemove))
+
+    if (parseInt(indexAnimeInFavToRemove) !== null) { //
+        console.log("dentrito")
+
+        favoriteAnimes.slice(removeAnimeId); //para meter ese anime en el array de paletas favoritas////
+    }
+    console.log(favoriteAnimes)
+    renderFavoriteSeries(favoriteAnimes)
+
+    //PARA GUARDAR LA LISTA DE FAVORITOS EN EL LOCALSTORAGE
+    localStorage.setItem("FavoriteAnimes", JSON.stringify(favoriteAnimes));
+    ///////////////////////////
+
+    //quitar clase favorite al li de container
+
+}
+
+
+function listenerRemoveIcon() {
+    const iconRemoveFav = document.querySelectorAll(".js-button-remove-favorite");
+
+    for (const oneIcon of iconRemoveFav) {//LISTENER DE CADA i MEDIANTE UN BUCLE
+
+        oneIcon.addEventListener('click', handleRemoveOneFav);
+    }
+}
+
+
+
+
+
+//borrar todos los favoritos
+const buttonRemoveAllFav = document.querySelector(".js-button-delete-all-fav");
+
+function handleRemoveAllFav() {
+
+}
+
+buttonRemoveAllFav.addEventListener('click', handleRemoveAllFav)
