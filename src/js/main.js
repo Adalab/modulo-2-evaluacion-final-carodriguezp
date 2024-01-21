@@ -5,13 +5,12 @@
 const inputSearch = document.querySelector(".js-input");
 const buttonSearch = document.querySelector(".js-button-search");
 const buttonReset = document.querySelector(".js-button-reset");
+const buttonRemoveAllFav = document.querySelector(".js-button-delete-all-fav");
 
 
+let animesList = [];
 
 //OBTENER DATOS DE LA API
-let animesList = [];
-let favoriteAnimes = [];
-
 function getDataApi(searchValue) {
     const url = `https://api.jikan.moe/v4/anime?q=${searchValue}`;
     fetch(url)
@@ -20,9 +19,7 @@ function getDataApi(searchValue) {
             // console.log(data[0].data.images.jpg.image_url, data.data[0].title)
             animesList = data.data;
             renderSeries(animesList)
-
         }
-
         )
 }
 
@@ -31,14 +28,29 @@ function renderSeries(seriesArray) {
 
     const containerResults = document.querySelector(".js-container-results");
     containerResults.innerHTML = "";
+    const favoriteAnimes = readDataLocalStorage()
+    ///// //AÑADIR STILO FAVORITE AL LI QUE SEA FAVORITE EN EL LOCALSTORAGE
 
     for (let i = 0; i < seriesArray.length; i++) {
 
-        containerResults.innerHTML += `<li class="container__section-results-div_list-results-element js-element-list" id="${seriesArray[i].mal_id}">
-                                            <img src="${seriesArray[i].images.jpg.image_url}" alt="Foto de la portada de ${seriesArray[i].title}">
-                                            <p>${seriesArray[i].title}</p>
-                                        </li>`;
-        ///CONDICIONAL IMAGEN
+        const indexfavoriteAnimeInFav = favoriteAnimes.findIndex((anime) => anime.mal_id === seriesArray[i].mal_id);
+
+        if (indexfavoriteAnimeInFav !== -1) { //sirve para el array vacio o para cuando ese array este lleno pero no tenga ese elemento i
+
+            containerResults.innerHTML += `<li class="container__section-results-div_list-results-element js-element-list favorite-anime" id="${seriesArray[i].mal_id}">
+                <img src="${seriesArray[i].images.jpg.image_url}" alt="Foto de la portada de ${seriesArray[i].title}">
+                <p>${seriesArray[i].title}</p>
+            </li>`;
+
+
+        } else {
+            containerResults.innerHTML += `<li class="container__section-results-div_list-results-element js-element-list" id="${seriesArray[i].mal_id}">
+                <img src="${seriesArray[i].images.jpg.image_url}" alt="Foto de la portada de ${seriesArray[i].title}">
+                <p>${seriesArray[i].title}</p>
+            </li>`;
+        }
+
+        ///CONDICIONAL IMAGEN--> la hago independientemente de los que evaluan el FIND INDEX porque siempre tengo que mirar lo de la imagen
 
         if (seriesArray[i].images.jpg.image_url === 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png') {
 
@@ -46,9 +58,11 @@ function renderSeries(seriesArray) {
         }
 
     }
+
     listenerAnimes()
 
 }
+
 function handleClick(event) {
 
     event.preventDefault();
@@ -56,6 +70,7 @@ function handleClick(event) {
     if (inputSearch.value) {
         getDataApi(inputSearch.value);
     }
+
 }
 
 
@@ -67,11 +82,10 @@ function renderFavoriteSeries(seriesArray) {
 
     const containerFavorite = document.querySelector(".js-container-favorite");
     containerFavorite.innerHTML = "";
-
     //RENDERIZAR ELEMENTOS EN EL CONTAINER DE FAVORITOS
     for (let i = 0; i < seriesArray.length; i++) {
 
-        containerFavorite.innerHTML += `<li class="js-element-list favorite-anime" id="${seriesArray[i].mal_id}">
+        containerFavorite.innerHTML += `<li class="container__section-favorite-div favorite-anime" id="${seriesArray[i].mal_id}">
                                             <img src="${seriesArray[i].images.jpg.image_url}" alt="Foto de la portada de ${seriesArray[i].title}">
                                             <p>${seriesArray[i].title}</p>
                                             <i id="${seriesArray[i].mal_id}" class="fa-solid fa-square-xmark js-button-remove-favorite"></i>
@@ -86,18 +100,24 @@ function renderFavoriteSeries(seriesArray) {
     }
     listenerAnimes()
     listenerRemoveIcon()
-    // 
+
+
+    if (!seriesArray.length) { //si no tengo largo de array es porque no hay array
+        buttonRemoveAllFav.classList.add('hidden')
+    } else {
+        buttonRemoveAllFav.classList.remove('hidden')
+    }
 }
 
 /*PARA CREAR FUNCION FAVORITOS */
 function handleAddFavoriteAnime(event) {
 
+    const favoriteAnimes = readDataLocalStorage();//esa variable llamará a la función de leer LS
+
     const idAnimeClicked = parseInt(event.currentTarget.id);
 
     //vamos a encontrar el anime  con find
     const favoriteAnimeId = animesList.find((anime) => idAnimeClicked === anime.mal_id); //que el id del anime que selecciono sea igual que el id del anime del array donde busca
-
-
 
     //VALIDACIÓN para ver si está ya en favoritos o no para pintarla o no
     const indexfavoriteAnimeInFav = favoriteAnimes.findIndex((anime) => anime.mal_id === idAnimeClicked);
@@ -109,10 +129,15 @@ function handleAddFavoriteAnime(event) {
 
     renderFavoriteSeries(favoriteAnimes)
 
-    buttonRemoveAllFav.classList.remove('hidden')
+
+
 
     //PARA GUARDAR LA LISTA DE FAVORITOS EN EL LOCALSTORAGE
-    localStorage.setItem("FavoriteAnimes", JSON.stringify(favoriteAnimes));
+    setDataLocalStorage(favoriteAnimes)
+    renderSeries(animesList)
+
+
+    buttonRemoveAllFav.classList.remove('hidden')
 }
 
 ///FUNCION LISTENER DE CADA LI
@@ -126,16 +151,14 @@ function listenerAnimes() {
     }
 }
 
-
-
 //HACER FUNCIÓN PARA PEDIR LOS DATOS AL LOCAL STORAGE (SIEMPRE SERÁ UN STRING) Y EJECUTARLO AL CARGAR LA PAGINA
-function getDataLocalStorage() {
+function showDataLocalStorage() {
 
-    const datafavoriteAnimesLocal = JSON.parse(localStorage.getItem("FavoriteAnimes")) //FavoriteAnimes es el nombre que le di al guardar en el local storage
+    const datafavoriteAnimesLocal = readDataLocalStorage() ///para leer los datos del LS
     //si no hay nada el servidor nos devuelve NULL
     if (datafavoriteAnimesLocal !== null) {//SI tenemos datos en el local estorage
         //modificamos el array de favoriteAnimes
-        favoriteAnimes = datafavoriteAnimesLocal; //para que coja los datos del localStorage
+
         renderFavoriteSeries(datafavoriteAnimesLocal) //volvemos a renderizar para pintar los datos que nos lleguen desde la API
 
     } else {
@@ -143,8 +166,20 @@ function getDataLocalStorage() {
     }
 }
 
-getDataLocalStorage()
+showDataLocalStorage()
+////FUNCION PARA LEER LOS DATOS DEL LOCAL STORAGE
 
+function readDataLocalStorage() {
+
+    if (!localStorage.getItem("FavoriteAnimes")) {
+        return [] //para que no de error cuando el elemento no exista aún 
+    }
+    return JSON.parse(localStorage.getItem("FavoriteAnimes"));
+}
+
+function setDataLocalStorage(dataArray) {
+    localStorage.setItem("FavoriteAnimes", JSON.stringify(dataArray));
+}
 
 //RESET BUTTON
 
@@ -153,7 +188,7 @@ function handleReset(event) {
     event.preventDefault();
 
     //remover elementos del local storage
-    favoriteAnimes = [];
+
     localStorage.removeItem('FavoriteAnimes');
     //limpiar pantalla
     const containerFavorite = document.querySelector(".js-container-favorite");
@@ -165,7 +200,6 @@ function handleReset(event) {
     buttonRemoveAllFav.classList.add('hidden')///EL BOTON 
 }
 
-
 buttonReset.addEventListener('click', handleReset)
 
 ///borrar un li favorito
@@ -175,33 +209,21 @@ buttonReset.addEventListener('click', handleReset)
 function handleRemoveOneFav(event) {
     //eliminar elemento li del container fav
 
-    ///////////////////////////
-    const iconRemoveFav = parseInt(event.currentTarget.id);
-
-    console.log(event.currentTarget, event.currentTarget.id)
-
+    const favoriteAnimes = readDataLocalStorage();
+    const favoriteId = parseInt(event.currentTarget.id);///id del icono, que es el id del li
 
     //vamos a encontrar el anime  con find
-    const removeAnimeId = favoriteAnimes.find((anime) => iconRemoveFav === anime.mal_id); //que el id del anime que selecciono sea igual que el id del anime del array donde busca
+    // const removeAnimeId = favoriteAnimes.find((anime) => iconRemoveFav === anime.mal_id); //que el id del anime que selecciono sea igual que el id del anime del array donde busca
 
 
     //VALIDACIÓN para ver si está ya en favoritos o no para pintarla o no
-    const indexAnimeInFavToRemove = favoriteAnimes.findIndex((anime) => anime.mal_id === iconRemoveFav);
-    console.log(favoriteAnimes, parseInt(indexAnimeInFavToRemove))
-
-    if (parseInt(indexAnimeInFavToRemove) !== null) { //
-        console.log("dentrito")
-
-        favoriteAnimes.slice(removeAnimeId); //para meter ese anime en el array de paletas favoritas////
-    }
-    console.log(favoriteAnimes)
-    renderFavoriteSeries(favoriteAnimes)
+    // const indexAnimeInFavToRemove = favoriteAnimes.findIndex((anime) => anime.mal_id === iconRemoveFav);
+    const filteredFavorites = favoriteAnimes.filter((favoriteAnime) => favoriteAnime.mal_id !== favoriteId); //id LS vs ID ICON
 
     //PARA GUARDAR LA LISTA DE FAVORITOS EN EL LOCALSTORAGE
-    localStorage.setItem("FavoriteAnimes", JSON.stringify(favoriteAnimes));
-    ///////////////////////////
-
-    //quitar clase favorite al li de container
+    setDataLocalStorage(filteredFavorites)
+    renderSeries(animesList)
+    renderFavoriteSeries(filteredFavorites)
 
 }
 
@@ -216,14 +238,20 @@ function listenerRemoveIcon() {
 }
 
 
-
-
-
 //borrar todos los favoritos
-const buttonRemoveAllFav = document.querySelector(".js-button-delete-all-fav");
+
 
 function handleRemoveAllFav() {
+
+
+    localStorage.removeItem("FavoriteAnimes");
+
+    renderSeries(animesList)
+
+    renderFavoriteSeries([]) //le paso un aray vacio para que no se renderice nada
 
 }
 
 buttonRemoveAllFav.addEventListener('click', handleRemoveAllFav)
+
+

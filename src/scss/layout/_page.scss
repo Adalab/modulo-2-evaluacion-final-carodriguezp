@@ -2,9 +2,18 @@ body {
     background-image: url(../../img/kanji.PNG);
 }
 
-h1 {
-    padding: 10px 20px;
+.tittle-container {
+    background-color: white;
+    border: solid 4px darkred;
+    margin: 10px 20px;
+
+    h1 {
+        padding: 10px 20px;
+        text-align: center;
+        color: darkred;
+    }
 }
+
 
 .form {
     padding: 10px 20px;
@@ -35,11 +44,6 @@ h1 {
 }
 
 .favorite-anime {
-    p {
-        color: greenyellow;
-        font-weight: bold;
-    }
-
     img {
         border: solid 5px greenyellow;
     }
@@ -78,12 +82,12 @@ h1 {
                 border: solid 3px white;
                 list-style: none;
 
-
                 img {
                     width: 150px;
                 }
 
-                i {
+                i,
+                p {
                     color: greenyellow;
                 }
             }
