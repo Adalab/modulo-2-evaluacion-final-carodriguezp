@@ -1,29 +1,60 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>TITULO DE LA WEB</title>
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
-      rel="stylesheet"
-    />
-    
-    !--
-    <link rel="icon" href="./images/favicon.png" />
-    --!
-    <link rel="stylesheet" href="./assets/index-5f41f281.css">
-  </head>
 
-  <body>
-    <div class="page">
-      <header class=""></header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Examen módulo JavaScript carodriguezp</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
 
-      <main class=""></main>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
 
-      <footer class=""></footer>
+  
 
-    </div>
-    <script src="./js/main.js"></script>
-  </body>
+  <script src="https://kit.fontawesome.com/153e998e96.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="./assets/index-ac97a264.css">
+</head>
+
+<body>
+  <div class="tittle-container">
+    <h1>Buscador de series de anime</h1>
+  </div>
+
+
+  <form class="form">
+
+    <input class=" input-search js-input" type="text" placeholder="Nombre de la serie" />
+
+    <button class=" button js-button-search">Buscar</button>
+    <button class=" button js-button-reset">Reset</button>
+
+
+  </form>
+
+  <div class="container">
+    <section class="container__section-favorite">
+      <h2>Series favoritas</h2>
+
+      <div class="container__section-favorite-div">
+        <ul class="js-container-favorite"></ul>
+        <button class="button js-button-delete-all-fav hidden">Eliminar todo</button>
+      </div>
+    </section>
+
+
+    <section class="container__section-results">
+      <h2>Resultados de búsqueda</h2>
+
+      <div class="container__section-results-div">
+        <ul class="container__section-results-div_list-results js-container-results"></ul>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="./js/main.js"></script>
+</body>
+
 </html>
