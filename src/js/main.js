@@ -16,7 +16,6 @@ function getDataApi(searchValue) {
     fetch(url)
         .then(response => response.json()) //recibo mi respuesta y la convierto en JSON
         .then(data => { //obtengo esos datos
-            // console.log(data[0].data.images.jpg.image_url, data.data[0].title)
             animesList = data.data;
             renderSeries(animesList)
         }
@@ -72,7 +71,6 @@ function handleClick(event) {
     }
 
 }
-
 
 buttonSearch.addEventListener('click', handleClick)
 
@@ -213,11 +211,8 @@ function handleRemoveOneFav(event) {
     const favoriteId = parseInt(event.currentTarget.id);///id del icono, que es el id del li
 
     //vamos a encontrar el anime  con find
-    // const removeAnimeId = favoriteAnimes.find((anime) => iconRemoveFav === anime.mal_id); //que el id del anime que selecciono sea igual que el id del anime del array donde busca
-
 
     //VALIDACIÓN para ver si está ya en favoritos o no para pintarla o no
-    // const indexAnimeInFavToRemove = favoriteAnimes.findIndex((anime) => anime.mal_id === iconRemoveFav);
     const filteredFavorites = favoriteAnimes.filter((favoriteAnime) => favoriteAnime.mal_id !== favoriteId); //id LS vs ID ICON
 
     //PARA GUARDAR LA LISTA DE FAVORITOS EN EL LOCALSTORAGE
