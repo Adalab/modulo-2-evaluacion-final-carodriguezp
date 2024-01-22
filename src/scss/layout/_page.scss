@@ -3,49 +3,71 @@ body {
 }
 
 .tittle-container {
-    background-color: white;
-    border: solid 4px darkred;
+    background-color: $color-white;
+    border: solid 4px $color-red;
     margin: 10px 20px;
 
     h1 {
         padding: 10px 20px;
         text-align: center;
-        color: darkred;
+        color: $color-red;
+        font-family: $font-Kaushan;
+        text-transform: capitalize;
+        font-size: 3.5rem;
     }
 }
 
 
-.form {
-    padding: 10px 20px;
-}
 
 .hidden {
     display: none;
+
+
 }
 
 .form {
+    padding: 10px 20px;
+
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
     input {
-        color: darkred;
-        font-weight: bold;
+        color: $color-red;
+        font-family: $font-Kaushan;
+        font-weight: $font-weight;
+        font-size: 1.6rem;
         padding: 10px 5px;
-        font-size: 15px;
+        border-radius: 3px 30px;
     }
 }
 
 .button {
-    font-size: 15px;
+    font-family: $font-Kaushan;
+    font-weight: $font-weight;
+    font-size: 1.6rem;
     text-transform: capitalize;
-    padding: 10px;
+    padding: 10px 20px;
     border: none;
-    border-radius: 10px;
-    background-color: darkred;
-    color: white;
+    border-radius: 3px 30px;
+    background-color: $color-red;
+    color: $color-white;
     cursor: pointer;
+
+    &:hover {
+        background-color: $color-green;
+        color: $color-red;
+        border: 3px solid $color-red;
+        transform: scale(1.1);
+        transition: transform 0.8s;
+    }
 }
+
+
 
 .favorite-anime {
     img {
-        border: solid 5px greenyellow;
+        border: solid 5px $color-green;
     }
 }
 
@@ -55,40 +77,62 @@ body {
     padding: 40px 100px;
 
     &__section-favorite {
-        border: solid 4px darkred;
+        border: solid 4px $color-red;
+        background-color: $color-white;
         width: 30vw;
         display: flex;
         flex-direction: column;
 
         h2 {
-            color: white;
-            font-weight: bold;
-
-            margin: 10px;
+            color: $color-white;
+            font-family: $font-Kaushan;
+            font-size: 1.8rem;
+            font-weight: $font-weight;
+            text-transform: capitalize;
             text-align: center;
-            background-color: darkred;
-
+            background-color: $color-red;
+            margin: 10px;
+            padding: 5px;
         }
 
         &-div {
+            gap: 5px;
+            padding-bottom: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
             ul {
-                background-color: darkred;
+                background-color: $color-red;
             }
 
             li {
                 display: flex;
+                flex-direction: row;
+                align-items: flex-start;
                 justify-content: space-between;
                 padding: 10px;
-                border: solid 3px white;
+                border: solid 3px $color-white;
                 list-style: none;
 
                 img {
                     width: 150px;
                 }
 
-                i,
+                i {
+                    color: $color-green;
+                    font-size: 1.6rem;
+
+                    &:hover {
+                        transform: scale(1.1);
+                        transition: transform 0.5s;
+                    }
+                }
+
                 p {
-                    color: greenyellow;
+                    color: $color-green;
+                    font-family: $font-Kaushan;
+                    font-size: 1.4rem;
                 }
             }
         }
@@ -96,40 +140,51 @@ body {
 
     &__section-results {
 
-        border: solid 4px darkred;
+        border: solid 4px $color-red;
+        background-color: $color-white;
         width: 50vw;
 
 
         h2 {
-            color: white;
-            font-weight: bold;
-            margin: 10px;
+            color: $color-white;
+            font-family: $font-Kaushan;
+            font-weight: $font-weight;
+            font-size: 1.8rem;
+            text-transform: capitalize;
             text-align: center;
-            background-color: darkred;
-
+            background-color: $color-red;
+            margin: 10px;
+            padding: 5px;
         }
 
         &-div {
 
 
             &_list-results {
-                background-color: white;
+                background-color: $color-white;
                 display: flex;
                 flex-direction: row;
+                justify-content: center;
                 flex-wrap: wrap;
+
 
 
                 &-element {
                     padding: 10px;
-                    border: solid 1px darkred;
+                    border: solid 1px $color-red;
                     list-style: none;
                     width: 180px;
                     margin: 5px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
 
                     p {
-                        text-align: center;
-                        color: darkred;
+                        color: $color-red;
+                        font-family: $font-Kaushan;
+                        font-size: 1.4rem;
                         font-weight: bold;
+                        text-align: center;
                     }
 
                     img {
