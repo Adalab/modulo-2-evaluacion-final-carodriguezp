@@ -90,22 +90,22 @@ src
 
 ####Initial view
 
-![Initial view](./src/images/image-1.PNG)
+![Initial view](./public/images/image-1.PNG)
 
 
 ####View after research
 
-![View after research](./src/images/image-2.PNG)
+![View after research](./public/images/image-2.PNG)
 
 
 ####View after select favorite anime
 
-![View after select favorite anime](./src/images/image-3.PNG)
+![View after select favorite anime](./public/images/image-3.PNG)
 
 
 ####view after refresh the website if favorites were selected
 
-![view after refresh the website if favorites were selected](./src/images/image-4.PNG)
+![view after refresh the website if favorites were selected](./public/images/image-4.PNG)
 
 ## Licence
 
