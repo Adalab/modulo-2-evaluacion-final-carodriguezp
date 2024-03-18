@@ -7,6 +7,8 @@ const buttonSearch = document.querySelector(".js-button-search");
 const buttonReset = document.querySelector(".js-button-reset");
 const buttonRemoveAllFav = document.querySelector(".js-button-delete-all-fav");
 
+const totalNumberResults = document.querySelector(".js-total-number-results");
+
 
 let animesList = [];
 
@@ -28,6 +30,7 @@ function renderSeries(seriesArray) {
     const containerResults = document.querySelector(".js-container-results");
     containerResults.innerHTML = "";
     const favoriteAnimes = readDataLocalStorage()
+    totalNumberResults.innerHTML = `Tienes ${seriesArray.length} resultados en total`;
     ///// //AÑADIR STILO FAVORITE AL LI QUE SEA FAVORITE EN EL LOCALSTORAGE
 
     for (let i = 0; i < seriesArray.length; i++) {
@@ -39,6 +42,9 @@ function renderSeries(seriesArray) {
             containerResults.innerHTML += `<li class="container__section-results-div_list-results-element js-element-list favorite-anime" id="${seriesArray[i].mal_id}">
                 <img src="${seriesArray[i].images.jpg.image_url}" alt="Foto de la portada de ${seriesArray[i].title}">
                 <p>${seriesArray[i].title}</p>
+                <p>${seriesArray[i].title}</p>
+                <p>${seriesArray[i].aired.string}</p>
+
             </li>`;
 
 
@@ -46,6 +52,8 @@ function renderSeries(seriesArray) {
             containerResults.innerHTML += `<li class="container__section-results-div_list-results-element js-element-list" id="${seriesArray[i].mal_id}">
                 <img src="${seriesArray[i].images.jpg.image_url}" alt="Foto de la portada de ${seriesArray[i].title}">
                 <p>${seriesArray[i].title}</p>
+                <p>${seriesArray[i].title}</p>
+                <p>${seriesArray[i].aired.string}</p>
             </li>`;
         }
 
@@ -59,6 +67,8 @@ function renderSeries(seriesArray) {
     }
 
     listenerAnimes()
+
+    counterResults(animesList)
 
 }
 
@@ -80,6 +90,7 @@ function renderFavoriteSeries(seriesArray) {
 
     const containerFavorite = document.querySelector(".js-container-favorite");
     containerFavorite.innerHTML = "";
+
     //RENDERIZAR ELEMENTOS EN EL CONTAINER DE FAVORITOS
     for (let i = 0; i < seriesArray.length; i++) {
 
@@ -250,3 +261,26 @@ function handleRemoveAllFav() {
 buttonRemoveAllFav.addEventListener('click', handleRemoveAllFav)
 
 
+function counterResults(seriesArray) {
+
+    let arrayExam = [2, 5, 9];
+
+    for (let i = 0; i < arrayExam.length; i++) {
+
+        if (seriesArray.length < arrayExam[i]) {
+
+            console.log(`La longitud del array es menor que ${arrayExam[i]}`)
+        }
+
+        else if (seriesArray.length > arrayExam[i]) {
+            console.log(`La longitud del array es mayor que ${arrayExam[i]}`)
+        }
+
+        else {
+            console.log(`La longitud del array es igual que ${arrayExam[i]}`)
+        }
+    }
+}
+
+
+totalNumberResults.addEventListener('click', counterResults)
