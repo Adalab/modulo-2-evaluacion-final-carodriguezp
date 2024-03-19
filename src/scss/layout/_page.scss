@@ -1,16 +1,21 @@
 body {
-    background-image: url(../images/kanji.PNG);
+    background: radial-gradient(circle, transparent 20%, $color-fair-blue 20%, $color-fair-blue 80%, transparent 80%, transparent) 0% 0% / 26px 26px, radial-gradient(circle, transparent 20%, $color-fair-blue 20%, $color-fair-blue 80%, transparent 80%, transparent) 13px 13px / 26px 26px, linear-gradient($color-clair-blue 0.5px, transparent 0.5px) 0px -0.25px / 13px 13px, linear-gradient(90deg, $color-clair-blue 0.5px, $color-fair-blue 0.5px) -0.25px 0px / 13px 13px $color-fair-blue;
+    background-size: 26px 26px, 26px 26px, 13px 13px, 13px 13px;
+    background-color: $color-fair-blue;
 }
 
 .tittle-container {
-    background-color: $color-white;
-    border: solid 4px $color-red;
+    box-shadow: inset 0px 0px 59px 0px rgba(120, 139, 255);
+    background-color: #e2eafc;
+    border-radius: 5px;
+    border: solid 4px $color-deep-blue;
     margin: 10px 20px;
 
     h1 {
         padding: 10px 20px;
         text-align: center;
-        color: $color-red;
+        color: $color-deep-blue;
+        text-shadow: 4px 0px 2px black;
         font-family: $font-Kaushan;
         text-transform: capitalize;
         font-size: 3.5rem;
@@ -31,12 +36,18 @@ body {
     gap: 10px;
 
     input {
-        color: $color-red;
+        color: $color-fire-orange;
         font-family: $font-Kaushan;
         font-weight: $font-weight;
         font-size: 1.6rem;
-        padding: 10px 5px;
+        padding: 10px 10px 10px 15px;
         border-radius: 3px 30px;
+        border: 3px solid $color-deep-blue;
+        background: linear-gradient(90deg, rgba(226, 234, 252, 1) 0%, rgba(193, 211, 254, 1) 36%, rgba(171, 196, 255, 1) 100%);
+
+        &:focus {
+            border: 3px solid $color-yellow-orange;
+        }
     }
 }
 
@@ -48,14 +59,14 @@ body {
     padding: 10px 20px;
     border: none;
     border-radius: 3px 30px;
-    background-color: $color-red;
-    color: $color-white;
+    background-color: $color-deep-blue;
+    color: $color-clair-blue;
     cursor: pointer;
 
     &:hover {
-        background-color: $color-green;
-        color: $color-red;
-        border: 3px solid $color-red;
+        background-color: $color-yellow-sun;
+        color: $color-deep-blue;
+        border: 3px solid $color-deep-blue;
         transform: scale(1.1);
         transition: transform 0.8s;
     }
@@ -65,7 +76,7 @@ body {
 
 .favorite-anime {
     img {
-        border: solid 5px $color-green;
+        border: solid 5px $color-yellow-sun;
     }
 }
 
@@ -75,8 +86,9 @@ body {
     padding: 40px 100px;
 
     &__section-favorite {
-        border: solid 4px $color-red;
-        background-color: $color-white;
+        border: solid 4px $color-deep-blue;
+        border-radius: 5px;
+        background-color: $color-clair-blue;
         width: 30vw;
         display: flex;
         flex-direction: column;
@@ -88,7 +100,7 @@ body {
             font-weight: $font-weight;
             text-transform: capitalize;
             text-align: center;
-            background-color: $color-red;
+            background-color: $color-deep-blue;
             margin: 10px;
             padding: 5px;
         }
@@ -101,7 +113,7 @@ body {
             align-items: center;
 
             ul {
-                background-color: $color-red;
+                background-color: $color-deep-blue;
             }
 
             li {
@@ -118,7 +130,7 @@ body {
                 }
 
                 i {
-                    color: $color-green;
+                    color: $color-yellow-sun;
                     font-size: 1.6rem;
 
                     &:hover {
@@ -128,7 +140,7 @@ body {
                 }
 
                 p {
-                    color: $color-green;
+                    color: $color-yellow-sun;
                     font-family: $font-Kaushan;
                     font-size: 1.4rem;
                 }
@@ -138,8 +150,9 @@ body {
 
     &__section-results {
 
-        border: solid 4px $color-red;
-        background-color: $color-white;
+        border: solid 4px $color-deep-blue;
+        border-radius: 5px;
+        background-color: $color-clair-blue;
         width: 50vw;
 
 
@@ -150,13 +163,23 @@ body {
             font-size: 1.8rem;
             text-transform: capitalize;
             text-align: center;
-            background-color: $color-red;
+            background-color: $color-deep-blue;
             margin: 10px;
             padding: 5px;
         }
 
         &-div {
 
+            &_text {
+                background-color: blue;
+                color: $color-deep-blue;
+                font-family: $font-Kaushan;
+                font-size: 1.4rem;
+                font-weight: bold;
+                text-align: center;
+                margin: 10px;
+                padding: 5px;
+            }
 
             &_list-results {
                 background-color: $color-white;
