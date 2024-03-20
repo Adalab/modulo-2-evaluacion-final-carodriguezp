@@ -206,7 +206,9 @@ function handleReset(event) {
     containerResults.innerHTML = "";
     //limpiar input
     inputSearch.value = "";
-    buttonRemoveAllFav.classList.add('hidden')///EL BOTON 
+    buttonRemoveAllFav.classList.add('hidden');///EL BOTON 
+    //limpiar p number of results
+    totalNumberResults.innerHTML = "";
 }
 
 buttonReset.addEventListener('click', handleReset)
