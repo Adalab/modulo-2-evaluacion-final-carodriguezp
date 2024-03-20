@@ -4,7 +4,7 @@
 
 This project is a responsive website layout exercise using **node y vite** , It is built using **HTML**, **SCSS** and **JavaScript**, providing a clean design for easy customization. 
 
-The wesite consists of developing a web application to search for anime series, which allows us to select the series as favorites and save them in local storage.
+The website consists of developing a web application to search for anime series, which allows us to select the series as favorites and save them in local storage.
 
 In the project we have used adalab's started Kit, which includes an HTML template engine, the SASS preprocessor and a local server and many other things. 
 
@@ -86,24 +86,24 @@ src
  └─ index
 
 ```
-##Screenshots
+## Screenshots
 
-####Initial view
+#### Initial view
 
 ![Initial view](./public/images/image-1.PNG)
 
 
-####View after research
+#### View after research
 
 ![View after research](./public/images/image-2.PNG)
 
 
-####View after select favorite anime
+#### View after select favorite anime
 
 ![View after select favorite anime](./public/images/image-3.PNG)
 
 
-####view after refresh the website if favorites were selected
+#### View after refresh the website if favorites were selected
 
 ![view after refresh the website if favorites were selected](./public/images/image-4.PNG)
 
