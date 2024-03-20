@@ -196,11 +196,12 @@ body {
                     padding: 10px;
                     border: solid 1px $color-pastel-blue;
                     list-style: none;
-                    width: 180px;
+                    width: 190px;
                     margin: 5px;
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
+                    align-items: center;
                     background-color: $color-fair-blue;
                     cursor: pointer;
 
