@@ -122,7 +122,7 @@ body {
                 align-items: flex-start;
                 justify-content: space-between;
                 padding: 10px;
-                border: solid 3px $color-white;
+                border: solid 3px $color-clair-blue;
                 list-style: none;
 
                 img {
@@ -132,17 +132,19 @@ body {
                 i {
                     color: $color-yellow-sun;
                     font-size: 1.6rem;
+                    cursor: pointer;
 
                     &:hover {
                         transform: scale(1.1);
                         transition: transform 0.5s;
+                        text-shadow: 0px 0px 8px $color-fire-orange;
                     }
                 }
 
                 p {
                     color: $color-yellow-sun;
-                    font-family: $font-Kaushan;
-                    font-size: 1.4rem;
+                    font-family: $font-Truculenta;
+                    font-size: 1.5rem;
                 }
             }
         }
@@ -171,18 +173,18 @@ body {
         &-div {
 
             &_text {
-                background-color: blue;
+
                 color: $color-deep-blue;
-                font-family: $font-Kaushan;
-                font-size: 1.4rem;
+                font-family: $font-Truculenta;
+                font-size: 1.5rem;
                 font-weight: bold;
-                text-align: center;
+                text-align: start;
                 margin: 10px;
                 padding: 5px;
             }
 
             &_list-results {
-                background-color: $color-white;
+                background-color: $color-clair-blue;
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
@@ -192,18 +194,26 @@ body {
 
                 &-element {
                     padding: 10px;
-                    border: solid 1px $color-red;
+                    border: solid 1px $color-pastel-blue;
                     list-style: none;
                     width: 180px;
                     margin: 5px;
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
+                    background-color: $color-fair-blue;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: pink;
+                        box-shadow: 0px 0px 8px 2px $color-fire-orange;
+                        border: none;
+                    }
 
                     p {
-                        color: $color-red;
-                        font-family: $font-Kaushan;
-                        font-size: 1.4rem;
+                        color: $color-fire-orange;
+                        font-family: $font-Truculenta;
+                        font-size: 1.5rem;
                         font-weight: bold;
                         text-align: center;
                     }
