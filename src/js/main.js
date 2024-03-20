@@ -41,7 +41,7 @@ function renderSeries(seriesArray) {
 
             containerResults.innerHTML += `<li class="container__section-results-div_list-results-element js-element-list favorite-anime" id="${seriesArray[i].mal_id}">
                 <img src="${seriesArray[i].images.jpg.image_url}" alt="Foto de la portada de ${seriesArray[i].title}">
-                <p>${seriesArray[i].title}</p>
+                
                 <p>${seriesArray[i].title}</p>
                 <p>${seriesArray[i].aired.string}</p>
 
@@ -51,9 +51,12 @@ function renderSeries(seriesArray) {
         } else {
             containerResults.innerHTML += `<li class="container__section-results-div_list-results-element js-element-list" id="${seriesArray[i].mal_id}">
                 <img src="${seriesArray[i].images.jpg.image_url}" alt="Foto de la portada de ${seriesArray[i].title}">
-                <p>${seriesArray[i].title}</p>
+
+                <section>
+                
                 <p>${seriesArray[i].title}</p>
                 <p>${seriesArray[i].aired.string}</p>
+                </section>
             </li>`;
         }
 
